@@ -1,4 +1,4 @@
-package com.sia;
+package com.sia.reportes;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,12 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
-import com.sia.pdf.SiaPDF;
-
+import com.sia.pdf.ReporteFotograficoPDF;
 import utilities.Constants;
 
-//[START simple_includes]
-import java.io.IOException;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -33,26 +30,20 @@ import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
-import javax.activation.DataHandler;
 import javax.mail.Multipart;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 //[END multipart_includes]
-
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class MailServlet
  */
 @SuppressWarnings("serial")
 @WebServlet("/mail")
-public class MailServlet extends HttpServlet {
+public class ReporteFotograficoMailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String emailTo;
-	private String subject;
-	private Constants constants = new Constants();
+	private String subject;	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -89,18 +80,19 @@ public class MailServlet extends HttpServlet {
 		Session session = Session.getDefaultInstance(props, null);
 
 		try {
+			System.out.println("Constants.EMAIL_FROM=" + Constants.EMAIL_FROM);
 			Message msg = new MimeMessage(session);
-			msg.setFrom(new InternetAddress(constants.EMAIL_FROM, constants.PERSONAL));
+			msg.setFrom(new InternetAddress(Constants.EMAIL_FROM, Constants.PERSONAL));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(emailTo, "Mr. User"));
 			msg.setSubject(subject);
 			msg.setText("This is a test");
 			Transport.send(msg);
 		} catch (AddressException e) {
-			// ...
+			System.out.println("catch:" + e.getMessage());
 		} catch (MessagingException e) {
-			// ...
+			System.out.println("catch:" + e.getMessage());
 		} catch (UnsupportedEncodingException e) {
-			// ...
+			System.out.println("catch:" + e.getMessage());
 		}
 		// [END simple_example]
 	}
@@ -113,16 +105,16 @@ public class MailServlet extends HttpServlet {
 
 		try {
 			Message msg = new MimeMessage(session);
-			msg.setFrom(new InternetAddress(constants.EMAIL_FROM, constants.PERSONAL));
+			msg.setFrom(new InternetAddress(Constants.EMAIL_FROM, Constants.PERSONAL));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(emailTo, "Mr. User"));
 			msg.setSubject(subject);
 			msg.setText(msgBody);
 
 			// [START multipart_example]
 			String htmlBody = ""; // ...
-			URL url = new URL("https://storage.googleapis.com/sia-ms-ei/reportes-fotograficos/cc4woq407.pdf");
+			/*URL url = new URL("https://storage.googleapis.com/sia-ms-ei/reportes-fotograficos/cc4woq407.pdf");
 			byte[] attachmentData = IOUtils.toByteArray(url.openStream());	
-			InputStream attachmentDataStream = new ByteArrayInputStream(attachmentData);
+			InputStream attachmentDataStream = new ByteArrayInputStream(attachmentData);*/
 			
 			Multipart mp = new MimeMultipart();
 			MimeBodyPart htmlPart = new MimeBodyPart();
@@ -131,7 +123,7 @@ public class MailServlet extends HttpServlet {
 			MimeBodyPart attachment = new MimeBodyPart();		
 			attachment.setFileName("cc4woq407.pdf");
 			//attachment.setContent(attachmentDataStream, "application/pdf");
-			attachment.setContent(new SiaPDF().generate(), "application/pdf");
+			attachment.setContent(new ReporteFotograficoPDF().generate(), "application/pdf");
 			mp.addBodyPart(attachment);
 
 			msg.setContent(mp);
@@ -140,13 +132,13 @@ public class MailServlet extends HttpServlet {
 			Transport.send(msg);
 
 		} catch (AddressException e) {
-			// ...
+			System.out.println("catch:" + e.getMessage());
 		} catch (MessagingException e) {
-			// ...
+			System.out.println("catch:" + e.getMessage());
 		} catch (UnsupportedEncodingException e) {
-			// ...
+			System.out.println("catch:" + e.getMessage());
 		} catch(Exception e) {
-			
+			System.out.println("catch:" + e.getMessage());
 		}
 	}
 }
