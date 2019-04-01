@@ -8,11 +8,11 @@ public class ReporteFotograficoDataTest {
 	public ReporteFotografico getData() {
 		ReporteFotografico obj = new ReporteFotografico();
 		obj.setReporteFotograficoId(BigInteger.valueOf(1));
-		obj.setS1Titulo("El titulo");
-		obj.setS1DivisionRegion("division");
-		obj.setS1Objetivo("objetivo");
+		obj.setS1Titulo("Inmuebles Redes");
+		obj.setS1DivisionRegion("Noreste");
+		obj.setS1Objetivo("Mantener la red de sucursales Bancomer bajo supervisión para garantizar la calidad y servicio en temas de mantenimiento, enfocando además una cercanía con el cliente atendiendo sus necesidades y preocupaciones en varios rubros de mantenimiento.");
 		obj.setS1Supervisor("supervisor");
-		obj.setS1Oficina("oficina");
+		obj.setS1Oficina("OFICINA: APODACA LOS FRESNOS CR 3809");
 		
 		obj.setS2PlantaEmergencia("planta emergencia");				
 	    obj.setS2AzoteaPropCompartida("azotea prop comp");
