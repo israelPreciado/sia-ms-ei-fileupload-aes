@@ -11,9 +11,17 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
 import com.google.apphosting.api.ApiProxy;
+import com.sia.model.FilesRepFotografico;
+import com.sia.model.ReporteFotografico;
 import com.sia.pdf.ReporteFotograficoPDF;
+import com.sia.services.FilesRepFotograficoServiceImpl;
+import com.sia.services.ReporteFotograficoServiceImpl;
+import com.sia.services.interfaces.FilesRepFotograficoService;
+import com.sia.services.interfaces.ReporteFotograficoService;
+
 import utilities.Constants;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import javax.mail.Message;
@@ -30,6 +38,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -50,6 +59,7 @@ public class ReporteFotograficoMailServlet extends HttpServlet {
 	private Connection conn;
 	private String emailTo;
 	private String subject;	
+	private Integer reporteFotograficoId = 0;
 
 	{
 		try {
@@ -82,9 +92,12 @@ public class ReporteFotograficoMailServlet extends HttpServlet {
 			
 			emailTo = request.getParameter("email");
 			subject = request.getParameter("subject");
-			String type = request.getParameter("type");
+			String type = request.getParameter("type");			
+			String strReporteFotograficoId = request.getParameter("rfid");			
 			
-			if (emailTo == null || "".equals(emailTo) || subject == null || "".equals(subject)) {
+			if(strReporteFotograficoId != null && !"".equals(strReporteFotograficoId)) reporteFotograficoId = Integer.valueOf(strReporteFotograficoId);
+			
+			if (reporteFotograficoId == 0 || emailTo == null || "".equals(emailTo) || subject == null || "".equals(subject) || type == null || "".equals(type)) {
 				out.println(obj.put("error", "Empty parameters"));
 			} else {
 				if (type != null && type.equals("multipart")) {
@@ -147,7 +160,14 @@ public class ReporteFotograficoMailServlet extends HttpServlet {
 			MimeBodyPart attachment = new MimeBodyPart();		
 			attachment.setFileName("cc4woq407.pdf");
 			//attachment.setContent(attachmentDataStream, "application/pdf");
-			attachment.setContent(new ReporteFotograficoPDF().generate(), "application/pdf");
+			
+			// datos
+			ReporteFotograficoService reporteFotograficoService = new ReporteFotograficoServiceImpl();	
+			FilesRepFotograficoService filesRepFotograficoService = new FilesRepFotograficoServiceImpl();
+			ReporteFotografico rf = reporteFotograficoService.findById(conn, BigInteger.valueOf(reporteFotograficoId));
+			List<FilesRepFotografico> files = filesRepFotograficoService.findAllByReporteFotograficoId(conn, BigInteger.valueOf(reporteFotograficoId));
+						
+			attachment.setContent(new ReporteFotograficoPDF().generate(rf, files), "application/pdf");
 			mp.addBodyPart(attachment);
 
 			msg.setContent(mp);
