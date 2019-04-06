@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
+import com.google.apphosting.api.ApiProxy;
 import com.sia.pdf.ReporteFotograficoPDF;
 import utilities.Constants;
 
+import java.util.Map;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -29,6 +31,9 @@ import java.io.PrintWriter;
 import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.mail.Multipart;
 import javax.mail.internet.MimeBodyPart;
@@ -42,9 +47,28 @@ import javax.mail.internet.MimeMultipart;
 @WebServlet("/mail")
 public class ReporteFotograficoMailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Connection conn;
 	private String emailTo;
 	private String subject;	
 
+	{
+		try {
+			ApiProxy.Environment env = ApiProxy.getCurrentEnvironment();
+			Map<String, Object> attr = env.getAttributes();
+			String hostname = (String) attr.get("com.google.appengine.runtime.default_version_hostname");
+
+			String url = hostname.contains("localhost:") ? System.getProperty("cloudsql-local") : System.getProperty("cloudsql");
+			System.out.println("connecting to: " + url);
+			try {
+				conn = DriverManager.getConnection(url);
+			} catch (SQLException e) {
+				System.out.println("Unable to connect to Cloud SQL: " + e);
+			}
+		} finally {
+
+		}
+	}
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)

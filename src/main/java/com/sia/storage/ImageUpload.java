@@ -82,7 +82,7 @@ public class ImageUpload {
 			this.fileName = image.getFilePart().getSubmittedFileName();		
 			this.fileExt = this.fileName.substring(this.fileName.lastIndexOf('.') + 1);
 			String fileNameTemp = this.fileName.substring(0, this.fileName.lastIndexOf("."));
-			this.randomFileName = fileNameTemp.replace(".", "").replace("#", "") + "_" + sdf.format(date) + "." + fileExt;				
+			this.randomFileName = fileNameTemp.replace(" ", "_").replace(".", "").replace("#", "") + "_" + sdf.format(date) + "." + fileExt;				
 			this.mediaLink = Constants.STORAGE_GOOGLE_API_URL + image.getBucketName() + "/" + image.getFolderName() + "/"
 					+ randomFileName;				
 			
