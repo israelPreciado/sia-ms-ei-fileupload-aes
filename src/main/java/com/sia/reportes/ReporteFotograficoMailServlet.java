@@ -158,7 +158,7 @@ public class ReporteFotograficoMailServlet extends HttpServlet {
 			htmlPart.setContent(htmlBody, "text/html");
 			mp.addBodyPart(htmlPart);
 			MimeBodyPart attachment = new MimeBodyPart();		
-			attachment.setFileName("cc4woq407.pdf");
+			//attachment.setFileName("cc4woq407.pdf");
 			//attachment.setContent(attachmentDataStream, "application/pdf");
 			
 			// datos
@@ -166,7 +166,8 @@ public class ReporteFotograficoMailServlet extends HttpServlet {
 			FilesRepFotograficoService filesRepFotograficoService = new FilesRepFotograficoServiceImpl();
 			ReporteFotografico rf = reporteFotograficoService.findById(conn, BigInteger.valueOf(reporteFotograficoId));
 			List<FilesRepFotografico> files = filesRepFotograficoService.findAllByReporteFotograficoId(conn, BigInteger.valueOf(reporteFotograficoId));
-						
+				
+			attachment.setFileName(rf.getS1Titulo() + ".pdf");
 			attachment.setContent(new ReporteFotograficoPDF().generate(rf, files), "application/pdf");
 			mp.addBodyPart(attachment);
 
