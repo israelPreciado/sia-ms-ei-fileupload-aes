@@ -12,10 +12,10 @@
     
     <!-- SQL Local -->
 	<property name="cloudsql-local"
-		value="jdbc:mysql://google/sia_ms?useSSL=false&amp;cloudSqlInstance=amazing-codex-169219:us-central1:sia-ms&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=root&amp;password=e$tr4t3giAm$39" />
+		value="jdbc:mysql://google/sia_ms?useSSL=false&amp;cloudSqlInstance=sia-ms:us-central1:siams&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=root&amp;password=e$tr4t3giAm$39" />
 	<!-- SQL Prod -->
 	<property name="cloudsql"
-		value="jdbc:google:mysql://amazing-codex-169219:us-central1:sia-ms/sia_ms?user=root&amp;password=e$tr4t3giAm$39&amp;autoReconnect=true" />
+		value="jdbc:google:mysql://sia-ms:us-central1:siams/sia_ms?user=root&amp;password=e$tr4t3giAm$39&amp;autoReconnect=true" />
   </system-properties>
 
 </appengine-web-app>

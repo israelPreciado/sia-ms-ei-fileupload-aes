@@ -16,6 +16,8 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.sia.model.ReporteFotografico;
 
+import utilities.Constants;
+
 /**
  * @author randd1
  *
@@ -32,7 +34,7 @@ public class ReporteFotograficoSeccion1 {
 			table1.setSpacingAfter(20);
 
 			// image logo
-			String imgLogoUrl = "https://storage.googleapis.com/sia-ms-ei-resources/reporte-fotografico/logo-bbva-bancomer.png";
+			String imgLogoUrl = Constants.STORAGE_GOOGLE_API_URL + Constants.RECURSOS_BUCKET_NAME + "/reporte-fotografico/logo-bbva-bancomer.png";
 			Image imgLogo = Image.getInstance(new URL(imgLogoUrl));
 			imgLogo.scaleToFit(169f, 33f);
 

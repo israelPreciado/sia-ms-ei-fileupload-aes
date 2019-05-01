@@ -27,8 +27,7 @@ import utilities.Constants;
  */
 @WebServlet(name = "files-rep-fotografico", urlPatterns = { "/files-rep-fotografico" })
 public class FilesRepFotograficoResource extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private static String BUCKET_NAME = "amazing-codex-169219.appspot.com";
+	private static final long serialVersionUID = 1L;	
 	private Connection conn;
 
 	{
@@ -112,7 +111,7 @@ public class FilesRepFotograficoResource extends HttpServlet {
 					out.println("{\"error\": \"1022: Empty parameters\"}");
 				} else {
 					if (isImage) {
-						String mediaLink = Constants.STORAGE_GOOGLE_API_URL + BUCKET_NAME + "/" + fileName;
+						String mediaLink = Constants.STORAGE_GOOGLE_API_URL + Constants.BUCKET_NAME + "/" + fileName;
 						
 						PreparedStatement ps;
 						String insertSql = "";							

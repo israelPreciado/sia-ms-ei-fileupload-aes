@@ -28,6 +28,8 @@ import com.lowagie.text.pdf.PdfWriter;
 import com.sia.model.FilesRepFotografico;
 import com.sia.model.ReporteFotografico;
 
+import utilities.Constants;
+
 /**
  * @author randd1
  *
@@ -226,8 +228,8 @@ public class ReporteFotograficoPDF {
 			cell.setVerticalAlignment(PdfPCell.ALIGN_CENTER);
 			tableHeader.addCell(cell);
 			
-			// cell 2
-			String imgLogoWhiteUrl = "https://storage.googleapis.com/sia-ms-ei-resources/reporte-fotografico/logo-bbva-blanco.png";
+			// cell 2			
+			String imgLogoWhiteUrl = Constants.STORAGE_GOOGLE_API_URL + Constants.RECURSOS_BUCKET_NAME + "/reporte-fotografico/logo-bbva-blanco.png";
 			Image imgLogoWhite = Image.getInstance(new URL(imgLogoWhiteUrl));					
 			imgLogoWhite.scaleToFit(173f, 51f);	
 			
