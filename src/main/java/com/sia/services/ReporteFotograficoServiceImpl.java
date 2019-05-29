@@ -32,7 +32,7 @@ public class ReporteFotograficoServiceImpl implements ReporteFotograficoService 
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("select reporte_fotografico_id, s1_titulo, s1_division_region, s1_objetivo, s1_supervisor, s1_oficina, s2_planta_emergencia, s2_azotea_prop_compartida, s2_local_prop_rentado");
-			sql.append(", s2_cuenta_estacionamiento, s2_num_cajas_ventanilla, s2_num_ejecutivos, s2_lugares_ejec_disponibles, s2_cuenta_banca_personal, s3_cuenta_senalizacion_prot_civ_completa");
+			sql.append(", s2_cuenta_estacionamiento, s2_num_cajas_ventanilla, s2_num_bancas_3_plazas, s2_num_bancas_2_plazas, s2_num_ejecutivos, s2_lugares_ejec_disponibles, s2_cuenta_banca_personal, s3_cuenta_senalizacion_prot_civ_completa");
 			sql.append(", s3_num_extintores, s3_cuenta_llave_switch, s3_cuenta_contactores_alumbrado_aa, s3_num_atms, s3_num_pc, s3_cuenta_piso_alfombra, s4_capacidad_ups_marca");
 			sql.append(", s4_cuenta_calefaccion, s4_garantia_impermeabilizacion, s4_facilidad_acceso_azotea, s4_cuenta_con_podio, s4_num_pantallas, fecha_creacion");
 			sql.append(" from reporte_fotografico");
@@ -56,6 +56,8 @@ public class ReporteFotograficoServiceImpl implements ReporteFotograficoService 
 				rf.setS2LocalPropRentado(obj.getString("s2_local_prop_rentado"));
 				rf.setS2CuentaEstacionamiento(obj.getString("s2_cuenta_estacionamiento"));
 				rf.setS2NumCajasVentanilla(obj.getString("s2_num_cajas_ventanilla"));
+				rf.setS2NumBancas3Plazas(obj.getString("s2_num_bancas_3_plazas"));
+				rf.setS2NumBancas2Plazas(obj.getString("s2_num_bancas_2_plazas"));
 				rf.setS2NumEjecutivos(obj.getString("s2_num_ejecutivos"));
 				rf.setS2LugaresEjecDisponibles(obj.getString("s2_lugares_ejec_disponibles"));
 				rf.setS2CuentaBancaPersonal(obj.getString("s2_cuenta_banca_personal"));

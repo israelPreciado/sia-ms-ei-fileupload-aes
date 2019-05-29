@@ -29,7 +29,7 @@ public class ReporteFotograficoSeccion2 {
 	public boolean generate(ReporteFotografico rf, Document document, boolean newPage, PdfPCell cell, Font fontBlackDefault, Font fontBlackBold18, float PADDING) {
 		try {
 			if(newPage) {
-				Rectangle pageSize = new Rectangle(600, 500);			
+				Rectangle pageSize = new Rectangle(600, 600);			
 				pageSize.setBackgroundColor(new Color(255, 255, 255));
 				document.setPageSize(pageSize);
 				document.newPage();
@@ -107,7 +107,7 @@ public class ReporteFotograficoSeccion2 {
 			table1.addCell(cell);
 			
 			// cell 8
-			cell = new PdfPCell(new Phrase("Número de ejecutivos: " + rf.getS2NumEjecutivos(), fontBlackDefault));
+			cell = new PdfPCell(new Phrase("Número de bancas de 3 plazas: " + rf.getS2NumBancas3Plazas(), fontBlackDefault));
 			cell.setColspan(2);
 			cell.setPaddingLeft(PADDING);
 			cell.setBorder(Rectangle.NO_BORDER);
@@ -116,7 +116,7 @@ public class ReporteFotograficoSeccion2 {
 			table1.addCell(cell);
 			
 			// cell 9
-			cell = new PdfPCell(new Phrase("Lugares ejecutivos disponibles: " + rf.getS2LugaresEjecDisponibles(), fontBlackDefault));
+			cell = new PdfPCell(new Phrase("Número de bancas de 2 plazas: " + rf.getS2NumBancas2Plazas(), fontBlackDefault));
 			cell.setColspan(2);
 			cell.setPaddingLeft(PADDING);
 			cell.setBorder(Rectangle.NO_BORDER);
@@ -125,6 +125,24 @@ public class ReporteFotograficoSeccion2 {
 			table1.addCell(cell);
 			
 			// cell 10
+			cell = new PdfPCell(new Phrase("Número de ejecutivos: " + rf.getS2NumEjecutivos(), fontBlackDefault));
+			cell.setColspan(2);
+			cell.setPaddingLeft(PADDING);
+			cell.setBorder(Rectangle.NO_BORDER);
+			cell.setPaddingTop(30f);
+			cell.setVerticalAlignment(PdfPCell.ALIGN_CENTER);
+			table1.addCell(cell);
+			
+			// cell 11
+			cell = new PdfPCell(new Phrase("Lugares ejecutivos disponibles: " + rf.getS2LugaresEjecDisponibles(), fontBlackDefault));
+			cell.setColspan(2);
+			cell.setPaddingLeft(PADDING);
+			cell.setBorder(Rectangle.NO_BORDER);
+			cell.setPaddingTop(30f);
+			cell.setVerticalAlignment(PdfPCell.ALIGN_CENTER);
+			table1.addCell(cell);
+			
+			// cell 12
 			cell = new PdfPCell(new Phrase("Cuenta con banca personal: " + rf.getS2CuentaBancaPersonal(), fontBlackDefault));
 			cell.setColspan(2);
 			cell.setPaddingLeft(PADDING);

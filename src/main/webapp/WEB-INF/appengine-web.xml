@@ -6,6 +6,11 @@
   <service>sia-ms-ei-fileupload-aes</service>
   <runtime>java8</runtime>
   <use-google-connector-j>true</use-google-connector-j>
+  <!-- See instance class: https://cloud.google.com/appengine/docs/standard/ -->
+  <instance-class>F4</instance-class>  
+  <automatic-scaling>
+  	<max-concurrent-requests>50</max-concurrent-requests>
+  </automatic-scaling>
 
   <system-properties>
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>

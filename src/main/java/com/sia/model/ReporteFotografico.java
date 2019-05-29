@@ -21,6 +21,8 @@ public class ReporteFotografico {
 	private String s2LocalPropRentado;
 	private String s2CuentaEstacionamiento;
 	private String s2NumCajasVentanilla;
+	private String s2NumBancas3Plazas;
+	private String s2NumBancas2Plazas;
 	private String s2NumEjecutivos;
 	private String s2LugaresEjecDisponibles;
 	private String s2CuentaBancaPersonal;
@@ -103,6 +105,18 @@ public class ReporteFotografico {
 	}
 	public void setS2NumCajasVentanilla(String s2NumCajasVentanilla) {
 		this.s2NumCajasVentanilla = s2NumCajasVentanilla;
+	}
+	public String getS2NumBancas3Plazas() {
+		return s2NumBancas3Plazas;
+	}
+	public void setS2NumBancas3Plazas(String s2NumBancas3Plazas) {
+		this.s2NumBancas3Plazas = s2NumBancas3Plazas;
+	}
+	public String getS2NumBancas2Plazas() {
+		return s2NumBancas2Plazas;
+	}
+	public void setS2NumBancas2Plazas(String s2NumBancas2Plazas) {
+		this.s2NumBancas2Plazas = s2NumBancas2Plazas;
 	}
 	public String getS2NumEjecutivos() {
 		return s2NumEjecutivos;
